@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Cumple Esther 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: #0d0d2b;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+            transition: background 2s ease-in-out;
+            position: relative;
+        }
+
+        /* 🌌 Fondo de estrellas animado */
+        .stars {
+            width: 100%;
+            height: 100%;
+            background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: moveStars 200s linear infinite;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        @keyframes moveStars {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -10000px 5000px;
+            }
+        }
+
+        /* 🎨 Gradiente animado después del unlock */
+        .party-bg {
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            z-index: 5;
+            /* 👈 siempre por encima de globos */
+            position: relative;
+        }
+
+        #countdown {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px 50px;
+            border-radius: 25px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            animation: pulse 3s infinite alternate;
+        }
+
+        #countdown h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            color: #ffdf6c;
+            margin-bottom: 15px;
+        }
+
+        #countdown p {
+            font-size: 1.3rem;
+            margin: 8px 0;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .card {
+            background: white;
+            color: #333;
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            z-index: 5;
+            /* 👈 carta siempre encima */
+        }
+
+        .card h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            color: #ff4d6d;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Globos 🎈 */
+        .balloon {
+            width: 80px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50% 50% 50% 50%;
+            position: absolute;
+            bottom: -150px;
+            animation: float 10s infinite ease-in;
+            z-index: 1;
+            /* 👈 siempre detrás del texto */
+            opacity: 0.85;
+        }
+
+        .balloon:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: #444;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-120vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div> <!-- 🌟 Fondo estrellas -->
+
+    <div class="container">
+        <div id="countdown">
+            <h1>✨🥳 ¡Bienvenida, Esthercita! 🥳✨</h1>
+            <p id="countdownText"></p>
+            <p style="font-size:1.1rem; margin-top:15px;">
+                Prepárate para sonreír 💖
+            </p>
+        </div>
+
+        <div id="birthdayCard" class="hidden">
+            <div class="card">
+                <h1>🎂 Feliz Cumpleaños Esther 🎂</h1>
+                <p>
+                    Hoy es un día especial porque celebramos a una persona increíble.
+                    Que la vida te llene de alegría, amor y momentos únicos.
+                    ¡Eres la mejor! 💖✨🎉
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const countdownEl = document.getElementById("countdown");
+        const countdownText = document.getElementById("countdownText");
+        const card = document.getElementById("birthdayCard");
+
+        const unlockDate = new Date("August 23, 2025 00:00:00").getTime();
+
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = unlockDate - now;
+
+            if (distance > 0) {
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownText.innerHTML =
+                    `Se desbloqueará exactamente en <b>${hours}h ${minutes}m ${seconds}s</b> ⏳`;
+            } else {
+                clearInterval(timer);
+                countdownEl.classList.add("hidden");
+                card.classList.remove("hidden");
+
+                // Cambiar fondo a gradiente animado 🎨
+                document.body.classList.add("party-bg");
+                document.querySelector(".stars").remove();
+
+                // Crear globos de colores 🎈
+                for (let i = 0; i < 20; i++) {
+                    let balloon = document.createElement("div");
+                    balloon.classList.add("balloon");
+                    balloon.style.left = Math.random() * window.innerWidth + "px";
+                    balloon.style.backgroundColor = `hsl(${Math.random() * 360},70%,60%)`;
+                    balloon.style.animationDuration = (8 + Math.random() * 5) + "s";
+                    document.body.appendChild(balloon);
+                }
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
