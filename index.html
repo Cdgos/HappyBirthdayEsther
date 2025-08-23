@@ -18,7 +18,6 @@
             align-items: center;
             overflow: hidden;
             color: #fff;
-            transition: background 2s ease-in-out;
             position: relative;
         }
 
@@ -44,26 +43,6 @@
             }
         }
 
-        .party-bg {
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
         .container {
             display: flex;
             flex-direction: column;
@@ -82,7 +61,6 @@
             border-radius: 25px;
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
             animation: pulse 3s infinite alternate;
-            transition: opacity 1s ease, transform 1s ease;
             max-width: 650px;
             width: auto;
             display: flex;
@@ -118,9 +96,7 @@
             border-radius: 25px;
             padding: 40px;
             width: 90vw;
-            /* <- esto hace que se ajuste al 90% de la ventana */
             max-width: 1000px;
-            /* <- ancho máximo */
             margin: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             position: absolute;
@@ -142,113 +118,12 @@
             font-family: 'Pacifico', cursive;
             font-size: 3rem;
             color: #ff4d6d;
-            animation: glow 2s infinite alternate;
         }
 
         .card p {
             font-size: 1.2rem;
             margin-top: 20px;
             text-align: justify;
-        }
-
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 5px #ffdf6c, 0 0 10px #ffdf6c;
-            }
-
-            100% {
-                text-shadow: 0 0 20px #ffdf6c, 0 0 30px #ffdf6c;
-            }
-        }
-
-        .balloon {
-            width: 80px;
-            height: 100px;
-            border-radius: 50%;
-            position: absolute;
-            bottom: -150px;
-            animation: float 10s infinite ease-in;
-            z-index: 1;
-            opacity: 0.85;
-        }
-
-        .balloon:before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 60px;
-            background: #444;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-120vh);
-            }
-        }
-
-        .confetti {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            opacity: 0.9;
-            pointer-events: none;
-            z-index: 2;
-            border-radius: 50%;
-        }
-
-        .particles {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: drift 10s linear infinite;
-        }
-
-        @keyframes drift {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            100% {
-                transform: translate(100vw, 100vh);
-            }
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: gold;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.8;
-            animation: sparkleAnim 1s linear infinite;
-        }
-
-        @keyframes sparkleAnim {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: scale(1.5);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
         }
 
         .slider {
@@ -319,22 +194,69 @@
             cursor: pointer;
             color: white;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            animation: btnGlow 2s infinite alternate;
             margin-top: 15px;
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        @keyframes btnGlow {
-            0% {
-                transform: scale(1);
+        @media (max-width: 768px) {
+            #countdown {
+                padding: 20px 30px;
             }
 
-            50% {
-                transform: scale(1.1);
+            #countdown h1 {
+                font-size: 1.8rem;
             }
 
-            100% {
-                transform: scale(1);
+            #countdown p {
+                font-size: 1rem;
+            }
+
+            #revealBtn {
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+
+            .card {
+                padding: 25px 20px;
+                width: 95vw;
+                max-width: 90vw;
+                max-height: 90vh;
+            }
+
+            .card h1 {
+                font-size: 2rem;
+            }
+
+            .card p {
+                font-size: 1rem;
+            }
+
+            .slider {
+                width: 95vw;
+                /* más ancho que antes */
+                height: 95vw;
+                /* alto proporcional para cuadrado */
+                margin: 15px auto;
+            }
+
+            .slides img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                /* ajusta para que ocupe todo */
+            }
+
+            .slider-button {
+                font-size: 1.5rem;
+                padding: 4px 10px;
+            }
+
+            .prev {
+                left: 5px;
+            }
+
+            .next {
+                right: 5px;
             }
         }
     </style>
@@ -344,7 +266,6 @@
     <div class="stars"></div>
 
     <div class="container">
-        <!-- Countdown inicial -->
         <div id="countdown">
             <h1>✨🥳 ¡Bienvenida, Esthercita! 🥳✨</h1>
             <p id="countdownText"></p>
@@ -352,7 +273,6 @@
             <button id="revealBtn">🎉 Abrir regalo 🎉</button>
         </div>
 
-        <!-- Tarjeta de cumpleaños -->
         <div id="birthdayCard" class="card">
             <h1>✨ Feliz Cumpleaños Esther ✨</h1>
             <div class="slider">
@@ -401,7 +321,6 @@
         const countdownText = document.getElementById("countdownText");
         const card = document.getElementById("birthdayCard");
         const revealBtn = document.getElementById("revealBtn");
-        const stars = document.querySelector(".stars");
 
         const unlockDate = new Date("August 22, 2025 00:00:00").getTime();
 
@@ -422,62 +341,9 @@
         }, 1000);
 
         revealBtn.addEventListener("click", () => {
-            countdown.style.opacity = 0;
-            countdown.style.transform = "scale(0.9)";
-            setTimeout(() => countdown.style.display = "none", 800);
-
+            countdown.style.display = "none";
             card.classList.add("show");
-            document.body.classList.add("party-bg");
-            stars.remove();
-
-            const audio = document.getElementById("birthdayAudio");
-            audio.play().catch(err => console.log("Audio bloqueado:", err));
-
-            // Globos
-            for (let i = 0; i < 20; i++) {
-                let balloon = document.createElement("div");
-                balloon.classList.add("balloon");
-                balloon.style.left = Math.random() * window.innerWidth + "px";
-                balloon.style.backgroundColor = `hsl(${Math.random() * 360},70%,60%)`;
-                balloon.style.animationDuration = (8 + Math.random() * 5) + "s";
-                document.body.appendChild(balloon);
-            }
-
-            // Confeti
-            setInterval(() => {
-                let c = document.createElement("div");
-                c.className = "confetti";
-                c.style.left = Math.random() * window.innerWidth + "px";
-                c.style.top = "-10px";
-                c.style.backgroundColor = `hsl(${Math.random() * 360},80%,70%)`;
-                c.style.width = (5 + Math.random() * 7) + "px";
-                c.style.height = c.style.width;
-                document.body.appendChild(c);
-                let fall = setInterval(() => {
-                    c.style.top = parseInt(c.style.top) + (2 + Math.random() * 3) + "px";
-                    c.style.left = parseInt(c.style.left) + (Math.random() * 4 - 2) + "px";
-                    if (parseInt(c.style.top) > window.innerHeight) { c.remove(); clearInterval(fall); }
-                }, 16);
-            }, 120);
-
-            // Partículas
-            for (let i = 0; i < 50; i++) {
-                let p = document.createElement('div');
-                p.classList.add('particles');
-                p.style.left = Math.random() * window.innerWidth + 'px';
-                p.style.top = Math.random() * window.innerHeight + 'px';
-                document.body.appendChild(p);
-            }
-
-            // Destellos
-            setInterval(() => {
-                let s = document.createElement('div');
-                s.className = 'sparkle';
-                s.style.left = Math.random() * card.offsetWidth + 'px';
-                s.style.top = Math.random() * card.offsetHeight + 'px';
-                card.appendChild(s);
-                setTimeout(() => s.remove(), 1000);
-            }, 300);
+            document.getElementById("birthdayAudio").play().catch(err => console.log("Audio bloqueado:", err));
 
             // Slider
             const slides = document.querySelectorAll(".slide");
